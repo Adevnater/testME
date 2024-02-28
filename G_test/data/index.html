@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <title>ESP32 Web Server</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,8 +8,36 @@
 </head>
 <body>
   <h1>ESP32 Web Server</h1>
-  <p>GPIO state: <strong> %STATE%</strong></p>
-  <p><a href="/on"><button class="button">ON</button></a></p>
-  <p><a href="/off"><button class="button button2">OFF</button></a></p>
+  <form action="/submit" method="get">
+  <p>SET DEVICE</p>
+
+  <input type="radio" id="master" name="setD" value="1">
+  <label for="master">MASTER</label><br>
+
+  <input type="radio" id="slave" name="setD" value="0">
+  <label for="slave">SLAVE</label><br>
+
+  <p>SET ONTIME</p>
+  <input type="number" id="ONTIME" name="ONTIME" min="1" step="1" max="65000"><label for="textbox">time (ms) </label><br><br>
+
+  <p>SET OFFTIME</p>
+  <input type="number" id="OFFTIME" name="OFFTIME" min="1" step="1" max="65000"><label for="text">time (ms) </label><br><br>
+
+
+  <p>SET PATTERN</p>
+  <select id="dropdown" name="PATTERN">
+    <option value="00">00</option>
+    <option value="01">01</option>
+    <option value="02">02</option>
+    <option value="03">03</option>
+  </select><br><br><br>
+
+  <input type="submit" value="Submit">
+</form>
+<br>
+<p>DEVICE is <strong> %DEVICESTATUS%</strong></p><br>
+<p>ONTIME is <strong> %timeON%</strong></p><br>
+<p>OFFTIME is <strong> %timeOFF%</strong></p><br>
+<p>PATTERN is <strong> %Patt%</strong></p><br>
 </body>
 </html>
