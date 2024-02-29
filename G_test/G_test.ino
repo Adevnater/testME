@@ -8,12 +8,14 @@
 #include "ESPAsyncWebServer.h"
 #include "SPIFFS.h"
 
+
 // Replace with your network credentials
-const char* ssid = "injectorhome_2.4GHz";
-const char* password = "sirapols0422";
+const char* ssid = "ESP32_access";
+const char* password = "12345678";
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
+// WiFiServer server(80);
 
 // Set LED GPIO
 const int LEDin = 2;
@@ -69,20 +71,25 @@ void setup(){
   }
 
   // Connect to Wi-Fi
-
-  // WiFi.softAP(ssid,password);
+  WiFi.mode(WIFI_AP_STA);
+  WiFi.softAP(ssid,password);
   // WiFi.softapAPConfig(local_ip,gateway,subnet);
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("AP IP address:");
+  Serial.println(IP);
   
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
+  // WiFi.begin(ssid, password);
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   delay(1000);
+  //   Serial.println("Connecting to WiFi..");
+  // }
   delay(500);
 
   // Print ESP32 Local IP Address
   Serial.println(WiFi.localIP());
 
+// Start server
+  server.begin();
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/index.html", String(), false, processor);
@@ -112,8 +119,6 @@ void setup(){
     request->send(SPIFFS, "/index.html", String(), false, processor);
   });
 
-  // Start server
-  server.begin();
 }
  
 void loop(){
