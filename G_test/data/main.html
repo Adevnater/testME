@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WSML - Configuration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .frame {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #666;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: calc(100% - 18px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0 0 10px;
+    }
+
+    legend {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>WSML - Configuration Form</h1>
+    <div class="frame">
+      <form id="configForm">
+        <fieldset>
+          <legend>Send To Mac Address:<strong>%MacSend%</strong></legend>
+          <input type="text" id="sendToMac" name="sendToMac">
+        </fieldset>
+
+        <fieldset>
+          <legend>Receive From Mac Address:<strong>%MacReceive%</strong></legend>
+          <input type="text" id="receiveFromMac" name="receiveFromMac">
+        </fieldset>
+
+        <fieldset>
+          <legend>On Time (ms):<strong>%V_on%</strong></legend>
+          <input type="number" id="onTime" name="onTime" min="1" max="65000" step="1">
+        </fieldset>
+
+        <fieldset>
+          <legend>Off Time (ms):<strong>%V_off%</strong></legend>
+          <input type="number" id="offTime" name="offTime" min="1" max="65000" step="1">
+        </fieldset>
+
+        <fieldset>
+          <legend>LED Pattern:<strong>%Patt%</strong></legend>
+          <input type="number" id="ledPattern" name="ledPattern">
+        </fieldset>
+
+        <fieldset>
+          <legend>Device Mode:<strong>%D_status%</strong></legend>
+          <label><input type="radio" name="deviceMode" value="master"> Master</label>
+          <label><input type="radio" name="deviceMode" value="slave"> Slave</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Pairing:<strong>%TrigP%</strong></legend>
+          <label><input type="checkbox" id="pairingToggle" name="pairingToggle"> Pairing</label>
+        </fieldset>
+
+        <fieldset id="pairingModeFrame" style="display: none;">
+          <legend>Pairing Mode:<strong>%TrigM%</strong></legend>
+          <label><input type="radio" name="pairingMode" value="masterToSlave"> Master to Slave</label>
+          <label><input type="radio" name="pairingMode" value="slaveToMaster"> Slave to Master</label>
+        </fieldset>
+
+        <button type="submit" >Send Config</button>
+        <button type="button" onclick="saveConfig()">Save Configuration</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function saveConfig() {
+      // Add your logic to save configuration here
+      alert("Configuration saved successfully!");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const pairingToggle = document.getElementById('pairingToggle');
+      const pairingModeFrame = document.getElementById('pairingModeFrame');
+
+      pairingToggle.addEventListener('change', function() {
+        pairingModeFrame.style.display = this.checked ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

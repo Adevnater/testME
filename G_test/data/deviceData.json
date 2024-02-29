@@ -1,0 +1,9 @@
+{
+  "IsMaster": false,
+  "ReceiveFromAddress": "AA:AA:AA:AA:AA:AA",
+  "SendToAddress": "AA:AA:AA:AA:AA:AA",
+  "LedPattern": 1,
+  "OnTime": 500,
+  "OffTime": 2000,
+  "Password":"0123456789"
+}
